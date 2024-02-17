@@ -1,0 +1,1 @@
+ALTER TABLE `news` DROP FOREIGN KEY foreign_news_category;

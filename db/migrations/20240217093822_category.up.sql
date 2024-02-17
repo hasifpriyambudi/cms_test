@@ -1,0 +1,7 @@
+CREATE TABLE `category` (
+  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `name_category` varchar(30) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `deleted_at` TIMESTAMP DEFAULT NULL
+);

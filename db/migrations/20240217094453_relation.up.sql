@@ -1,0 +1,1 @@
+ALTER TABLE `news` ADD CONSTRAINT `foreign_news_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
