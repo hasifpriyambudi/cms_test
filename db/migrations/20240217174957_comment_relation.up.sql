@@ -1,0 +1,1 @@
+ALTER TABLE `comment` ADD CONSTRAINT `foreign_comment_news` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`);
