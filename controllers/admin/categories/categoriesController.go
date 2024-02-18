@@ -20,17 +20,17 @@ type CategoriesAdminController interface {
 	DetailCategoriesAdmin(ctx *gin.Context)
 }
 
-type CategoriesControllerImpl struct {
+type CategoriesControllerAdminImpl struct {
 	CategoriesService categoriesadminservice.CategoriesAdminService
 }
 
 func NewCategoriesAdminRepositoryImpl(categoriesService categoriesadminservice.CategoriesAdminService) CategoriesAdminController {
-	return &CategoriesControllerImpl{
+	return &CategoriesControllerAdminImpl{
 		CategoriesService: categoriesService,
 	}
 }
 
-func (impl *CategoriesControllerImpl) CreateCategoriesAdmin(ctx *gin.Context) {
+func (impl *CategoriesControllerAdminImpl) CreateCategoriesAdmin(ctx *gin.Context) {
 	var categories domain.CategoriesCreateRequest
 	err := helpers.ReadJSON(ctx, &categories)
 	if err != nil {
@@ -45,7 +45,7 @@ func (impl *CategoriesControllerImpl) CreateCategoriesAdmin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
-func (impl *CategoriesControllerImpl) UpdateCategoriesAdmin(ctx *gin.Context) {
+func (impl *CategoriesControllerAdminImpl) UpdateCategoriesAdmin(ctx *gin.Context) {
 	var categories domain.CategoriesUpdateRequest
 	err := helpers.ReadJSON(ctx, &categories)
 	if err != nil {
@@ -60,7 +60,7 @@ func (impl *CategoriesControllerImpl) UpdateCategoriesAdmin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
-func (impl *CategoriesControllerImpl) DeleteCategoriesAdmin(ctx *gin.Context) {
+func (impl *CategoriesControllerAdminImpl) DeleteCategoriesAdmin(ctx *gin.Context) {
 	// Get Param
 	idString := ctx.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -76,7 +76,7 @@ func (impl *CategoriesControllerImpl) DeleteCategoriesAdmin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
-func (impl *CategoriesControllerImpl) GetCategoriesAdmin(ctx *gin.Context) {
+func (impl *CategoriesControllerAdminImpl) GetCategoriesAdmin(ctx *gin.Context) {
 	// Exec Service
 	categoriesResponse := impl.CategoriesService.GetCategoriesAdmin(ctx)
 
@@ -85,7 +85,7 @@ func (impl *CategoriesControllerImpl) GetCategoriesAdmin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
-func (impl *CategoriesControllerImpl) DetailCategoriesAdmin(ctx *gin.Context) {
+func (impl *CategoriesControllerAdminImpl) DetailCategoriesAdmin(ctx *gin.Context) {
 	// Get Param
 	idString := ctx.Param("id")
 	id, err := strconv.Atoi(idString)

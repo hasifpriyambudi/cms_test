@@ -9,13 +9,16 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/hasifpriyambudi/cms_test/app"
 	categoriesadmincontroller "github.com/hasifpriyambudi/cms_test/controllers/admin/categories"
+	custompageadmincontroller "github.com/hasifpriyambudi/cms_test/controllers/admin/custom-page"
 	authController "github.com/hasifpriyambudi/cms_test/controllers/auth"
 	"github.com/hasifpriyambudi/cms_test/exceptions"
 	"github.com/hasifpriyambudi/cms_test/middleware"
 	categoriesadminrepository "github.com/hasifpriyambudi/cms_test/repository/admin/categories"
+	custompageadminrepository "github.com/hasifpriyambudi/cms_test/repository/admin/custom-page"
 	authrepository "github.com/hasifpriyambudi/cms_test/repository/auth"
 	"github.com/hasifpriyambudi/cms_test/routes"
 	categoriesadminservice "github.com/hasifpriyambudi/cms_test/service/admin/categories"
+	custompageadminservice "github.com/hasifpriyambudi/cms_test/service/admin/custom-page"
 	authservice "github.com/hasifpriyambudi/cms_test/service/auth"
 )
 
@@ -32,6 +35,10 @@ func main() {
 		categoriesRepository categoriesadminrepository.CategoriesAdminRepository = categoriesadminrepository.NewCategoriesAdminRepositoryImpl()
 		categoriesService    categoriesadminservice.CategoriesAdminService       = categoriesadminservice.NewCategoriesAdminServiceImpl(categoriesRepository, db, validate)
 		categoriesController categoriesadmincontroller.CategoriesAdminController = categoriesadmincontroller.NewCategoriesAdminRepositoryImpl(categoriesService)
+
+		customPageRepository custompageadminrepository.CustomPageAdminRepository = custompageadminrepository.NewCustomPageAdminRepositoryImpl()
+		customPageService    custompageadminservice.CustomPageAdminService       = custompageadminservice.NewCustomPageAdminServiceImpl(customPageRepository, db, validate)
+		customPageController custompageadmincontroller.CustomPageAdminController = custompageadmincontroller.NewCustomPageAdminRepositoryImpl(customPageService)
 	)
 
 	server := gin.Default()
@@ -45,6 +52,7 @@ func main() {
 	adminGroup := apiGroup.Group("/admin")
 	adminGroup.Use(middleware.Authenticate())
 	routes.Categories(adminGroup, categoriesController)
+	routes.CustomPage(adminGroup, customPageController)
 
 	// Check Port Running
 	port := os.Getenv("PORT")
