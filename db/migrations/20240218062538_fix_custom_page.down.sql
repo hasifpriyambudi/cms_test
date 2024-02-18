@@ -1,0 +1,1 @@
+ALTER TABLE custom_page DROP INDEX unique_custom_url;

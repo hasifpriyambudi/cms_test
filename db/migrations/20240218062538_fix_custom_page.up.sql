@@ -1,0 +1,1 @@
+ALTER TABLE custom_page ADD CONSTRAINT unique_custom_url UNIQUE (custom_url);
