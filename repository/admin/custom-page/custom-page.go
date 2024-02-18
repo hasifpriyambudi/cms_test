@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hasifpriyambudi/cms_test/entity"
+	"github.com/hasifpriyambudi/cms_test/exceptions"
 	"github.com/hasifpriyambudi/cms_test/helpers"
 )
 
@@ -27,7 +28,10 @@ func NewCustomPageAdminRepositoryImpl() CustomPageAdminRepository {
 func (impl *CustomPageAdminRepositoryImpl) CreateCustomPageAdmin(ctx *gin.Context, tx *sql.Tx, customPage entity.CustomPageEntity) entity.CustomPageEntity {
 	sqlQuery := "INSERT INTO custom_page(custom_url, page_content, created_at) VALUE(?, ?, ?)"
 	res, err := tx.ExecContext(ctx, sqlQuery, customPage.Custom_Url, customPage.Page_Content, time.Now())
-	helpers.PanicError(err)
+	if err != nil {
+		err = helpers.MysqlError(err)
+		panic(exceptions.NewMysqlError(err))
+	}
 
 	// Get Last Insert
 	id, err := res.LastInsertId()

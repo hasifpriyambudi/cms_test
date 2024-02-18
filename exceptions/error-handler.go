@@ -30,6 +30,10 @@ func ErrorHandler() gin.HandlerFunc {
 					res := utils.BuildResponseFailed(http.StatusUnauthorized, "", err.Error.Error(), "")
 					ctx.AbortWithStatusJSON(http.StatusUnauthorized, res)
 					return
+				case MysqlError:
+					res := utils.BuildResponseFailed(http.StatusBadRequest, "", err.Error.Error(), "")
+					ctx.AbortWithStatusJSON(http.StatusBadRequest, res)
+					return
 				default:
 					defError := reco.(error)
 					res := utils.BuildResponseFailed(http.StatusInternalServerError, "", defError.Error(), "")
