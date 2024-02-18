@@ -15,6 +15,7 @@ import (
 	authController "github.com/hasifpriyambudi/cms_test/controllers/auth"
 	"github.com/hasifpriyambudi/cms_test/exceptions"
 	"github.com/hasifpriyambudi/cms_test/middleware"
+	"github.com/hasifpriyambudi/cms_test/repository"
 	categoriesadminrepository "github.com/hasifpriyambudi/cms_test/repository/admin/categories"
 	custompageadminrepository "github.com/hasifpriyambudi/cms_test/repository/admin/custom-page"
 	newsadminrepository "github.com/hasifpriyambudi/cms_test/repository/admin/news"
@@ -52,6 +53,10 @@ func main() {
 
 		newsService    services.NewsService       = services.NewNewsAdminRepositoryImpl(newsRepository, categoriesRepository, db, validate)
 		newsController controllers.NewsController = controllers.NewNewsRepositoryImpl(newsService)
+
+		commentRepository repository.CommentRepository  = repository.NewCommentRepositoryImpl()
+		commentService    services.CommentService       = services.NewCommentServiceImpl(commentRepository, newsRepository, db, validate)
+		commentController controllers.CommentController = controllers.NewCommentControllerImpl(commentService)
 	)
 
 	server := gin.Default()
@@ -60,6 +65,7 @@ func main() {
 
 	// Public
 	routes.News(apiGroup, newsController)
+	routes.Comment(apiGroup, commentController)
 
 	// Auth
 	routesadmin.Auth(apiGroup, authController)
