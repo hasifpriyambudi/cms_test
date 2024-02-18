@@ -1,0 +1,15 @@
+{
+	"id": "4b2ace77-737a-4229-b822-3dabd47956ed",
+	"name": "Latihan Rest Go",
+	"values": [
+		{
+			"key": "base",
+			"value": "http://localhost:",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-02-18T16:44:01.703Z",
+	"_postman_exported_using": "Postman/10.23.1"
+}
