@@ -19,7 +19,7 @@ type AuthControllerImpl struct {
 	AuthService authservice.AuthService
 }
 
-func NewAuthController(service authservice.AuthService) AuthController {
+func NewAuthControllerImpl(service authservice.AuthService) AuthController {
 	return &AuthControllerImpl{
 		AuthService: service,
 	}

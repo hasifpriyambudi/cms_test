@@ -29,13 +29,13 @@ func Authenticate() gin.HandlerFunc {
 		authHeader = strings.Replace(authHeader, "Bearer ", "", -1)
 		token, err := helpers.ValidateToken(authHeader)
 		if err != nil {
-			err = errors.New("failed proses request")
+			err = errors.New("unauthorized")
 			panic(exceptions.NewAuthError(err))
 		}
 
 		// Cek Token Valid
 		if !token.Valid {
-			err := errors.New("failed proses request")
+			err := errors.New("unauthorized")
 			panic(exceptions.NewAuthError(err))
 		}
 
