@@ -43,8 +43,8 @@ func (impl *CustomPageAdminRepositoryImpl) CreateCustomPageAdmin(ctx *gin.Contex
 }
 
 func (impl *CustomPageAdminRepositoryImpl) UpdateCustomPageAdmin(ctx *gin.Context, tx *sql.Tx, customPage entity.CustomPageEntity) entity.CustomPageEntity {
-	sqlQuery := "UPDATE custom_page SET custom_url=?, page_content=? WHERE id=?"
-	_, err := tx.ExecContext(ctx, sqlQuery, customPage.Custom_Url, customPage.Page_Content, customPage.Id)
+	sqlQuery := "UPDATE custom_page SET custom_url=?, page_content=?, updated_at=? WHERE id=?"
+	_, err := tx.ExecContext(ctx, sqlQuery, customPage.Custom_Url, customPage.Page_Content, time.Now(), customPage.Id)
 	helpers.PanicError(err)
 
 	return customPage
