@@ -27,7 +27,7 @@ func NewCategoriesAdminRepositoryImpl() CategoriesAdminRepository {
 
 func (impl *CategoriesAdminRepositoryImpl) CreateCategoriesAdmin(ctx *gin.Context, tx *sql.Tx, categories entity.CategoriesEntity) entity.CategoriesEntity {
 	sqlQuery := "INSERT INTO category(name_category, created_at) VALUE(?, ?)"
-	res, err := tx.ExecContext(ctx, sqlQuery, categories.Name_Category, time.Now())
+	res, err := tx.ExecContext(ctx, sqlQuery, categories.Name, time.Now())
 	if err != nil {
 		err = helpers.MysqlError(err)
 		panic(exceptions.NewMysqlError(err))
@@ -43,7 +43,7 @@ func (impl *CategoriesAdminRepositoryImpl) CreateCategoriesAdmin(ctx *gin.Contex
 
 func (impl *CategoriesAdminRepositoryImpl) UpdateCategoriesAdmin(ctx *gin.Context, tx *sql.Tx, categories entity.CategoriesEntity) entity.CategoriesEntity {
 	sqlQuery := "UPDATE category SET name_category=?, updated_at=? WHERE id=?"
-	_, err := tx.ExecContext(ctx, sqlQuery, categories.Name_Category, time.Now(), categories.Id)
+	_, err := tx.ExecContext(ctx, sqlQuery, categories.Name, time.Now(), categories.Id)
 	helpers.PanicError(err)
 
 	return categories
@@ -64,7 +64,7 @@ func (impl *CategoriesAdminRepositoryImpl) GetCategoriesAdmin(ctx *gin.Context, 
 	var categories []entity.CategoriesEntity
 	for res.Next() {
 		category := entity.CategoriesEntity{}
-		err := res.Scan(&category.Id, &category.Name_Category)
+		err := res.Scan(&category.Id, &category.Name)
 		helpers.PanicError(err)
 		categories = append(categories, category)
 	}
@@ -86,7 +86,7 @@ func (impl *CategoriesAdminRepositoryImpl) DetailCategoriesAdmin(ctx *gin.Contex
 	// Binding
 	category := entity.CategoriesEntity{}
 	if res.Next() {
-		err := res.Scan(&category.Id, &category.Name_Category)
+		err := res.Scan(&category.Id, &category.Name)
 		helpers.PanicError(err)
 		return category, nil
 	}

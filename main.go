@@ -48,11 +48,11 @@ func main() {
 		customPageAdminController custompageadmincontroller.CustomPageAdminController = custompageadmincontroller.NewCustomPageAdminRepositoryImpl(customPageAdminService)
 
 		newsRepository      newsadminrepository.NewsAdminRepository = newsadminrepository.NewNewsAdminRepositoryImpl()
-		newsAdminService    newsadminservice.NewsAdminService       = newsadminservice.NewNewsAdminRepositoryImpl(newsRepository, categoriesRepository, db, validate)
-		newsAdminController newsadmincontroller.NewsAdminController = newsadmincontroller.NewNewsAdminRepositoryImpl(newsAdminService)
+		newsAdminService    newsadminservice.NewsAdminService       = newsadminservice.NewNewsAdminServiceImpl(newsRepository, categoriesRepository, db, validate)
+		newsAdminController newsadmincontroller.NewsAdminController = newsadmincontroller.NewNewsAdminControllerImpl(newsAdminService)
 
 		newsService    services.NewsService       = services.NewNewsAdminRepositoryImpl(newsRepository, categoriesRepository, db, validate)
-		newsController controllers.NewsController = controllers.NewNewsRepositoryImpl(newsService)
+		newsController controllers.NewsController = controllers.NewNewsControllerImpl(newsService)
 
 		commentRepository repository.CommentRepository  = repository.NewCommentRepositoryImpl()
 		commentService    services.CommentService       = services.NewCommentServiceImpl(commentRepository, newsRepository, db, validate)

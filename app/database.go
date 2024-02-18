@@ -26,3 +26,16 @@ func NewDB() *sql.DB {
 
 	return db
 }
+
+func NewDBTest() *sql.DB {
+
+	db, err := sql.Open("mysql", "root:admin@tcp(localhost:3306)/cms_test?parseTime=true")
+	helpers.PanicError(err)
+
+	db.SetConnMaxIdleTime(5)
+	db.SetMaxOpenConns(20)
+	db.SetConnMaxIdleTime(10 * time.Minute)
+	db.SetConnMaxLifetime(60 * time.Minute)
+
+	return db
+}

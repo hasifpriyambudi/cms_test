@@ -46,7 +46,7 @@ func (impl *CategoriesAdminServiceImpl) CreateCategoriesAdmin(ctx *gin.Context, 
 
 	// Binding Request
 	categories := entity.CategoriesEntity{
-		Name_Category: request.Name,
+		Name: request.Name,
 	}
 
 	categories = impl.CategoriesRepository.CreateCategoriesAdmin(ctx, tx, categories)
@@ -73,14 +73,14 @@ func (impl *CategoriesAdminServiceImpl) UpdateCategoriesAdmin(ctx *gin.Context, 
 	}
 
 	// Update Binding
-	categories.Name_Category = request.Name
+	categories.Name = request.Name
 
 	// Exec Repo Update
 	categories = impl.CategoriesRepository.UpdateCategoriesAdmin(ctx, tx, categories)
 
 	return domain.CategoriesUpdateResponse{
 		Id:   categories.Id,
-		Name: categories.Name_Category,
+		Name: categories.Name,
 	}
 }
 
@@ -117,7 +117,7 @@ func (impl *CategoriesAdminServiceImpl) GetCategoriesAdmin(ctx *gin.Context) []d
 	for _, category := range categories {
 		resCategory := domain.CategoriesGetResponse{
 			Id:   category.Id,
-			Name: category.Name_Category,
+			Name: category.Name,
 		}
 		resCategories = append(resCategories, resCategory)
 	}
@@ -139,6 +139,6 @@ func (impl *CategoriesAdminServiceImpl) DetailCategoriesAdmin(ctx *gin.Context, 
 
 	return domain.CategoriesGetResponse{
 		Id:   category.Id,
-		Name: category.Name_Category,
+		Name: category.Name,
 	}
 }

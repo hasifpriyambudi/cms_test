@@ -19,7 +19,7 @@ type NewsControllerImpl struct {
 	NewsService services.NewsService
 }
 
-func NewNewsRepositoryImpl(newsService services.NewsService) NewsController {
+func NewNewsControllerImpl(newsService services.NewsService) NewsController {
 	return &NewsControllerImpl{
 		NewsService: newsService,
 	}

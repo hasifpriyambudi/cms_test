@@ -24,7 +24,7 @@ type NewsControllerAdminImpl struct {
 	NewsService newsadminservice.NewsAdminService
 }
 
-func NewNewsAdminRepositoryImpl(newsService newsadminservice.NewsAdminService) NewsAdminController {
+func NewNewsAdminControllerImpl(newsService newsadminservice.NewsAdminService) NewsAdminController {
 	return &NewsControllerAdminImpl{
 		NewsService: newsService,
 	}

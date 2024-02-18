@@ -28,7 +28,7 @@ type NewsAdminServiceImpl struct {
 	Validate             *validator.Validate
 }
 
-func NewNewsAdminRepositoryImpl(newsRepository newsadminrepository.NewsAdminRepository, categoriesRepository categoriesadminrepository.CategoriesAdminRepository, db *sql.DB, validate *validator.Validate) NewsAdminService {
+func NewNewsAdminServiceImpl(newsRepository newsadminrepository.NewsAdminRepository, categoriesRepository categoriesadminrepository.CategoriesAdminRepository, db *sql.DB, validate *validator.Validate) NewsAdminService {
 	return &NewsAdminServiceImpl{
 		NewsRepository:       newsRepository,
 		CategoriesRepository: categoriesRepository,
